@@ -1,0 +1,3 @@
+- name: Incorrect OS
+  ansible.builtin.debug:
+   msg: "No tasks for current OS"

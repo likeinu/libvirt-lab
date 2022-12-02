@@ -1,0 +1,8 @@
+# Измение имени сервера
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: Set timezone
+  community.general.system.timezone:
+    name: Asia/Tbilisi

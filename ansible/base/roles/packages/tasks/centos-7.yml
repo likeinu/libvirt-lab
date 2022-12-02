@@ -1,0 +1,9 @@
+- name: Install epel release
+  ansible.builtin.yum:
+    name: epel-release
+    state: present
+
+- name: Install packages on centos
+  ansible.builtin.yum:
+    name: "{{ packages }}"
+    state: present

@@ -1,0 +1,15 @@
+- name: Add parameter to /etc/dnf/dnf.conf
+  ansible.builtin.lineinfile:
+    path: /etc/dnf/dnf.conf
+    line: fastestmirror=1
+
+- name: Install epel release
+  ansible.builtin.dnf:
+    name: epel-release
+    update_cache: true
+    state: present
+
+- name: Install packages on centos
+  ansible.builtin.dnf:
+    name: "{{ packages }}"
+    state: present

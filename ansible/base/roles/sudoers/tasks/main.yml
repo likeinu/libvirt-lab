@@ -1,0 +1,12 @@
+# Add suduers rules
+- name: Adding sudoers rules
+  community.general.sudoers:
+    name: "{{ item.0.name }}"
+    state: "{{ item.0.state | default('present') }}"
+    group: "{{ item.0.group }}"
+    runas: "{{ item.0.runas }}"
+    commands: "{{ item.1 }}"
+    nopassword: "{{ item.0.nopassword | default(true) }}"
+  loop: "{{ sudoers_list | subelements('commands') }}"
+  loop_control:
+    label: "{{ item.0.name }}"

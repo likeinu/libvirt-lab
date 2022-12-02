@@ -1,0 +1,32 @@
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+*.lock.hcl
+
+# Crash log files
+crash.log
+
+# Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
+*tfplan*
+
+.vagrant
+**/sec.*
+
+# ansible inventory
+**/inventory_*.yml
+**/hosts
+**/inventory.yml
+**/inventory
+
+# Compiled executable and python script in ansible
+**/haskell-server/files/*
+**/python-goods/files/*
+
+# python
+**/__pycache__/*
+# haskell
+**/dist-newstyle/*
+

@@ -1,0 +1,24 @@
+groups_list:
+  - { name: "admins" }
+ 
+sudoers_list:
+  - name: "admins-to-root"
+    group: "admins"
+    runas: "ALL"
+    commands:
+      - "ALL"
+
+users_list:
+  - name: "user"
+    comment: "User"
+    groups: "admins"
+    authorized_keys:
+      - key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/user.pub') }}"
+        state: "present"
+
+packages:
+  - mc
+  - vim
+  - net-tools
+  - qemu-guest-agent
+  - sudo

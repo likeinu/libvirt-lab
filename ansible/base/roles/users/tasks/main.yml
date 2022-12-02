@@ -1,0 +1,30 @@
+# Create groups
+- name: Adding groups
+  ansible.builtin.group:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('present') }}"
+  loop: "{{ groups_list }}"
+
+# Create users
+- name: Adding users
+  ansible.builtin.user:
+    name: "{{ item.name | mandatory }}"
+    comment: "{{ item.comment | mandatory }}"
+    groups: "{{ item.groups | default('') }}"
+    append: "{{ item.append | default(true) }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    state: "{{ item.state | default('present') }}"
+    remove: "{{ item.remove | default(false) }}"
+  loop: "{{ users_list }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+# Add authorized keys for ssh
+- name: Adding authorized_keys
+  ansible.posix.authorized_key:
+    user: "{{ item.0.name }}"
+    key: "{{ item.1.key | mandatory }}"
+    state: "{{ item.1.state | default('present') }}"
+  loop: "{{ users_list | subelements('authorized_keys') }}"
+  loop_control:
+    label: "{{ item.0.name }}"

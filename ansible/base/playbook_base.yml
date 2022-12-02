@@ -1,0 +1,36 @@
+- name: Hosts availability check
+  hosts: all:!localhost
+  gather_facts: false
+  ignore_unreachable: yes
+  tasks:
+    - name: Test
+      ansible.builtin.ping:
+      register: ping_result
+    - name: Status
+      ansible.builtin.group_by:
+        key: "common_status_{{ ping_result.ping | default('fail') }}"
+
+- name: Setup servers
+  hosts: common_status_pong
+  strategy: free
+  vars:
+    groups_list:
+      - { name: "admins" }
+    sudoers_list:
+      - name: "admins-to-root"
+        group: "admins"
+        runas: "ALL"
+        commands:
+          - "ALL"
+    users_list:
+      - name: "belko"
+        comment: "belko"
+        groups: "admins"
+        authorized_keys:
+          - key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_belkos.pub') }}"
+            state: "present"
+  roles:
+    - set_hostname
+    - packages
+    - users
+    - sudoers

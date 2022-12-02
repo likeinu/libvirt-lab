@@ -1,0 +1,4 @@
+packages:
+  - mc
+  - vim
+  - net-tools
