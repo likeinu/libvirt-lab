@@ -19,6 +19,7 @@ crash.log
 **/inventory_*.yml
 **/hosts
 **/inventory.yml
+**/inventory.yaml
 **/inventory
 
 # Compiled executable and python script in ansible
