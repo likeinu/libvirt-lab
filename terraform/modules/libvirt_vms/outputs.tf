@@ -1,7 +1,7 @@
-output "libvirt_domains" {
+output "libvirt_vms_domains" {
   value = libvirt_domain.vms_domain
 }
 
-output "test" {
+output "pools" {
   value = local.pools
 }

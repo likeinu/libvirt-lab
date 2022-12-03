@@ -1,6 +1,7 @@
-project                       = "test"
-libvirt_vms_pool_isos         = "isos"
-ansible_base_path          = "../../ansible/base"
+project               = "test"
+libvirt_vms_pool_isos = "isos"
+ansible_base_path     = "../../ansible/base"
+libvirt_vms_pools_root = "/wrk/kvm/pools"
 
 ansible_user = {
   name    = "ansible"
@@ -14,25 +15,28 @@ libvirt_vms_net = {
   domain = ".llab"
 }
 
+default_vm_type = "common"
 
-libvirt_domain_defaults = {
-  vcpu             = "1"
-  memory           = "1024"
-  size             = "11811160064"
-  root_pool_path   = "/wrk/kvm/pools"
-  pool_name        = ""
-  base_volume_pool = "bases"
-}
-
-default_group = "common"
-
-libvirt_domains = {
-  "app-ubu20" = {
-    base_volume_name = "ubuntu-focal.qcow2"
-    type             = "app"
+# Add type(group) for vms (it isn't need for module libvirt_vms, but it's need for ansible)
+libvirt_vms_domains = {
+  ubu20 = {
+    type = "app"
+    disks = [
+      {
+        volume_base_name = "ubuntu-focal.qcow2"
+        volume_base_pool = "bases"
+        name             = "root"
+      }
+    ]
   }
-  "web-cen8" = {
-    base_volume_name = "centos-8-stream.qcow2"
-    type             = "web"
+  cen8 = {
+    type = "app"
+    disks = [
+      {
+        volume_base_name = "centos-8-stream.qcow2"
+        volume_base_pool = "bases"
+        name             = "root"
+      }
+    ]
   }
 }
