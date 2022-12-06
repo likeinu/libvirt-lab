@@ -1,0 +1,64 @@
+-------
+cen8.test:
+   architecture: x86_64
+   OS: CentOS 8 (Stream)
+   kernel: 4.18.0-408.el8.x86_64
+   python_version: 3.6.8
+   ipv4_addresses: ['192.168.111.121']
+   ipv6_addresses: ['fe80::5054:ff:fea6:25a0']
+   interfaces: ['eth0', 'lo']
+   memory_total: 804 Mb
+   memory_free: 151 Mb
+   processor: ['0', 'GenuineIntel', 'QEMU Virtual CPU version 2.5+']
+   mounts:
+      point: /
+         device: /dev/vda1
+         fstype: xfs
+         uuid: 8b21ecd0-7865-4044-940f-4fa1342ba986
+         size_total: 10.99 GB
+         size_available: 9.34 GB
+   
+-------
+ubu20.test:
+   architecture: x86_64
+   OS: Ubuntu 20.04 (focal)
+   kernel: 5.4.0-1079-kvm
+   python_version: 3.8.10
+   ipv4_addresses: ['192.168.111.218']
+   ipv6_addresses: ['fe80::5054:ff:fe62:79a9']
+   interfaces: ['ens3', 'lo']
+   memory_total: 987 Mb
+   memory_free: 274 Mb
+   processor: ['0', 'GenuineIntel', 'QEMU Virtual CPU version 2.5+']
+   mounts:
+      point: /
+         device: /dev/root
+         fstype: ext4
+         uuid: 70c3daf2-29ac-4fa7-9372-4fdae4a9b78a
+         size_total: 10.48 GB
+         size_available: 8.97 GB
+      point: /snap/snapd/17576
+         device: /dev/loop0
+         fstype: squashfs
+         uuid: N/A
+         size_total: 49.75 MB
+         size_available: 0.00 Bytes
+      point: /snap/core20/1695
+         device: /dev/loop1
+         fstype: squashfs
+         uuid: N/A
+         size_total: 63.25 MB
+         size_available: 0.00 Bytes
+      point: /snap/lxd/22753
+         device: /dev/loop2
+         fstype: squashfs
+         uuid: N/A
+         size_total: 67.88 MB
+         size_available: 0.00 Bytes
+      point: /boot/efi
+         device: /dev/vda15
+         fstype: vfat
+         uuid: 0985-0970
+         size_total: 104.35 MB
+         size_available: 99.17 MB
+   

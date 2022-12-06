@@ -1,0 +1,24 @@
+{% for host in groups['all'] | difference(['localhost']) %}
+-------
+{{ host }}:
+   architecture: {{ hostvars[host]['ansible_facts']['architecture'] }}
+   OS: {{ hostvars[host]['ansible_facts']['distribution'] }} {{ hostvars[host]['ansible_facts']['distribution_version'] }} ({{ hostvars[host]['ansible_facts']['distribution_release'] }})
+   kernel: {{ hostvars[host]['ansible_facts']['kernel'] }}
+   python_version: {{ hostvars[host]['ansible_facts']['python_version'] }}
+   ipv4_addresses: {{ hostvars[host]['ansible_facts']['all_ipv4_addresses'] }}
+   ipv6_addresses: {{ hostvars[host]['ansible_facts']['all_ipv6_addresses'] }}
+   interfaces: {{ hostvars[host]['ansible_facts']['interfaces'] }}
+   memory_total: {{ hostvars[host]['ansible_facts']['memtotal_mb'] }} Mb
+   memory_free: {{ hostvars[host]['ansible_facts']['memfree_mb'] }} Mb
+   processor: {{ hostvars[host]['ansible_facts']['processor'] }}
+   mounts:
+   {% for mount in hostvars[host]['ansible_facts']['mounts'] %}
+   point: {{ mount['mount'] }}
+         device: {{ mount['device'] }}
+         fstype: {{ mount['fstype'] }}
+         uuid: {{ mount['uuid'] }}
+         size_total: {{ mount['size_total'] | human_readable}}
+         size_available: {{ mount['size_available'] | human_readable}}
+   {% endfor %}
+
+{% endfor %}

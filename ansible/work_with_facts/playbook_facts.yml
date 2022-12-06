@@ -1,0 +1,10 @@
+- name: Gather information
+  hosts: all:!localhost
+  tasks:
+    - name: File with data
+      ansible.builtin.template:
+        src: data.j2
+        dest: "data"
+        mode: 0644
+      delegate_to: locahost
+      connection: local
