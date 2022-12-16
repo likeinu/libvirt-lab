@@ -1,0 +1,10 @@
+galaxy_info:
+  author: Anastasiya Berezina
+  description: Disable SELinux
+  company: home
+  license: BSD
+  min_ansible_version: "2.10"
+  platforms:
+    - name: EL
+      versions:
+        - "7"

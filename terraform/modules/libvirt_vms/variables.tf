@@ -47,6 +47,19 @@ variable "libvirt_vms_domains" {
     graphics_listen_type    = optional(string, "none")
     graphics_listen_address = optional(string)
     graphics_websocket      = optional(string)
+    video_type              = optional(string, "cirrus")
+    console = optional(object({
+      type           = optional(string, "pty")
+      target_port    = optional(string, "0")
+      target_type    = optional(string, "serial")
+      source_path    = optional(string)
+      source_service = optional(string)
+      source_host    = optional(string)
+    }))
+    cpu = optional(object({
+      type = optional(string)
+    }))
+
     disks = list(object({
       name             = string
       pool_root_path   = optional(string, "")

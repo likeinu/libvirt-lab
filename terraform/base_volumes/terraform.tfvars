@@ -25,4 +25,18 @@ bases = {
     url  = "https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-20220829.0.x86_64.qcow2"
     name = "centos-9-stream.qcow2"
   }
+  fedora-37 = {
+    # url = "https://download.fedoraproject.org/pub/fedora/linux/releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-Vagrant-37-1.7.x86_64.vagrant-libvirt.box"
+    url = "https://download.fedoraproject.org/pub/fedora/linux/releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2"
+    name = "fedora-37.qcow2"
+  }
+    fedora-37-server = {
+    url  = "https://download.fedoraproject.org/pub/fedora/linux/releases/37/Server/x86_64/images/Fedora-Server-KVM-37-1.7.x86_64.qcow2"
+    name = "fedora-37-server.qcow2"
+  }
+  rocky-9 = {
+    url  = "https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2"
+    # url = "http://dl.rockylinux.org/stg/rocky/9/images/x86_64/Rocky-9-GenericCloud.latest.x86_64.qcow2"
+    name = "rocky-9.qcow2"
+  }
 }

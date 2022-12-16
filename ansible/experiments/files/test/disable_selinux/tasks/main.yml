@@ -1,0 +1,5 @@
+# Выключение SELinux на CentOS
+- name: CentOS -  Disable SELinux
+  selinux:
+    state: disabled
+  when: ansible_facts['distribution'] == 'CentOS'

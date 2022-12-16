@@ -1,0 +1,14 @@
+- name: Test
+  hosts: all:!localhost
+  tasks:
+    - name: Copy test files
+      ansible.builtin.copy:
+        src: test
+        dest: /home/belko/src
+        mode: preserve
+        owner: ansible
+    - name: Archive
+      community.general.archive:
+        path: "/home/belko/src/test/*"
+        dest: "/home/belko/tt.tgz"
+        mode: 0644

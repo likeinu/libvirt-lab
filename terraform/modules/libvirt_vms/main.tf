@@ -76,6 +76,23 @@ resource "libvirt_domain" "vms_domain" {
   memory    = each.value.memory
   autostart = each.value.autostart
   cloudinit = libvirt_cloudinit_disk.vms_init.id
+  dynamic "console" {
+    for_each = each.value.console[*]
+    content {
+      type        = console.value.type
+      target_port = console.value.target_port
+      target_type = console.value.target_type
+      source_path = console.value.source_path
+    }
+  }
+  dynamic "cpu" {
+    for_each = each.value.cpu[*]
+    content {
+      mode = cpu.value.type
+    }
+
+  }
+
   network_interface {
     network_id     = libvirt_network.vms_net.id
     hostname       = each.key
@@ -90,7 +107,9 @@ resource "libvirt_domain" "vms_domain" {
     listen_address = each.value.graphics_listen_address
     websocket      = each.value.graphics_websocket
   }
-
+  video {
+    type = each.value.video_type
+  }
   dynamic "disk" {
     for_each = each.value.disks
     content {

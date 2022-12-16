@@ -55,7 +55,7 @@ resource "null_resource" "ansible" {
   }
 
   provisioner "local-exec" {
-    working_dir = "${var.ansible_base_path}"
+    working_dir = var.ansible_base_path
     command     = "ansible-playbook -i ${var.ansible_base_path}/inventory/inventory_${var.project}.yml playbook_base.yml"
   }
 }
