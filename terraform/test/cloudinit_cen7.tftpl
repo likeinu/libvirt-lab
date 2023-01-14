@@ -1,0 +1,14 @@
+#cloud-config
+users:
+  - name: ${name}
+    lock_passwd: true
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-authorized-keys:
+      - ${chomp(file(join(".", [ssh_key, "pub"])))}
+
+write_files:
+  - path: /home/chk.test
+    content: |
+      baba
+    permissions: '0644'

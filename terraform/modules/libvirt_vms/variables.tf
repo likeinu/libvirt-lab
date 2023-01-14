@@ -38,6 +38,7 @@ variable "libvirt_vms_net" {
 variable "libvirt_vms_domains" {
   type = map(object({
     vcpu                    = optional(number, 1)
+    cloudinit_template      = optional(string, "")
     memory                  = optional(number, 1024)
     autostart               = optional(bool, false)
     addresses               = optional(list(string))

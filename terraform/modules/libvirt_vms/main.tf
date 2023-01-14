@@ -40,9 +40,10 @@ resource "libvirt_pool" "vms_pool" {
 
 # Create init disk for project
 resource "libvirt_cloudinit_disk" "vms_init" {
-  name      = "${var.libvirt_vms_project}_init.iso"
+  for_each  = var.libvirt_vms_domains
+  name      = "${var.libvirt_vms_project}_${each.key}_init.iso"
   pool      = var.libvirt_vms_pool_isos
-  user_data = templatefile("${path.module}/cloudinit.tftpl", var.libvirt_vms_default_user)
+  user_data = templatefile("${each.value.cloudinit_template == "" ? "${path.module}/cloudinit.tftpl" : each.value.cloudinit_template}", var.libvirt_vms_default_user)
 }
 
 # Create all volumes
@@ -75,7 +76,7 @@ resource "libvirt_domain" "vms_domain" {
   vcpu      = each.value.vcpu
   memory    = each.value.memory
   autostart = each.value.autostart
-  cloudinit = libvirt_cloudinit_disk.vms_init.id
+  cloudinit = libvirt_cloudinit_disk.vms_init[each.key].id
   dynamic "console" {
     for_each = each.value.console[*]
     content {
