@@ -19,7 +19,7 @@ default_vm_type = "common"
 
 # Add type(group) for vms (it isn't needed for module libvirt_vms, but it is needed for ansible)
 libvirt_vms_domains = {
-  cen7 = {
+  cen7_1 = {
     type                 = "app"
     graphics_type        = "vnc"
     graphics_listen_type = "address"
@@ -40,5 +40,27 @@ libvirt_vms_domains = {
         name             = "root"
       }
     ]
-  }
+  },
+  /*cen7_2 = {
+    type                 = "web"
+    graphics_type        = "vnc"
+    graphics_listen_type = "address"
+    cloudinit_template   = "cloudinit_cen7.tftpl"
+    console = {
+      type        = "pty"
+      target_port = "0"
+      target_type = "serial"
+    }
+
+    cpu = {
+      type = "host-passthrough"
+    }
+    disks = [
+      {
+        volume_base_name = "centos-7.qcow2"
+        volume_base_pool = "bases"
+        name             = "root"
+      }
+    ]
+  } */
 }

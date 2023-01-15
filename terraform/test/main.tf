@@ -18,8 +18,10 @@ locals {
   vms_types = {
     for key, value in var.libvirt_vms_domains : lookup(value, "type", var.default_vm_type) => key...
   }
+  ips = {
+    for key, value in var.libvirt_vms_domains : key => module.libvirt_vms.libvirt_vms_domains[key].network_interface[0].addresses
+  }
 }
-
 # Create inventory for ansible
 resource "local_file" "hosts" {
   filename        = "${var.ansible_base_path}/inventory/inventory_${var.project}.yml"
@@ -42,7 +44,7 @@ all:
           hosts:
           %{~for server in value~}
             ${module.libvirt_vms.libvirt_vms_domains[server].name}:
-              ansible_host: ${module.libvirt_vms.libvirt_vms_domains[server].network_interface.0.addresses.0}
+              ansible_host: ${length(local.ips[server]) != 0 ? local.ips[server][0] : "-"}
           %{~endfor~}
       %{~endfor~}
 EOT
